@@ -15,6 +15,12 @@ export class CreateMemberDto {
   @ApiProperty()
   password: string;
   @ApiProperty()
+  birth_date: Date;
+  @ApiProperty()
+  image_path: string;
+  @ApiProperty()
+  description: string;
+  @ApiProperty()
   create_date: Date;
   @ApiProperty()
   update_date: Date;

@@ -4,6 +4,7 @@ import { UpdateMemberDto } from './dto/update-member.dto';
 import { Member } from './entities/member.entity';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { ServiceDto } from './dto/service.dto';
 
 @Injectable()
 export class MemberService {
@@ -30,6 +31,12 @@ export class MemberService {
       },
       updateMemberDto,
     });
+  }
+
+  async updateService(serviceDto: ServiceDto) {
+    await this.MemberModel.findByIdAndUpdate(serviceDto.member_id, {
+      $push: {service: serviceDto.service_id}
+    })
   }
 
   remove(id: number) {

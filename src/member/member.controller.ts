@@ -7,11 +7,14 @@ import {
   Param,
   Delete,
   Version,
+  Put,
+  HttpCode,
 } from '@nestjs/common';
 import { MemberService } from './member.service';
 import { CreateMemberDto } from './dto/create-member.dto';
 import { UpdateMemberDto } from './dto/update-member.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { ServiceDto } from './dto/service.dto';
 
 @ApiTags('MemberController')
 @Controller('member')
@@ -45,5 +48,12 @@ export class MemberController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.memberService.remove(+id);
+  }
+
+  @Version('1')
+  @Post('add-service')
+  @HttpCode(201)
+  async updateMemberService(@Body() serviceDto: ServiceDto) {
+    await this.memberService.updateService(serviceDto);
   }
 }
